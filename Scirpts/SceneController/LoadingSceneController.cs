@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.Loading;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadingSceneController : MonoBehaviour
@@ -24,11 +26,14 @@ public class LoadingSceneController : MonoBehaviour
 
     private bool isLoadingBarComplete = false;
 
-
+    public TMP_Text loadingButtonText;
+    public Button loadingButton;
 
     private void Awake()
     {
         LoadingBarAwake();
+        StartLoadingMenuBgm();
+        DisableLoadingButton();
     }
 
     private void Start()
@@ -65,8 +70,10 @@ public class LoadingSceneController : MonoBehaviour
         {
             isLoadingBarComplete = true;
             SetLoadingBarGrassRollInvisible();
+            UpdateLoadingButton();
+            EnableLoadingButton();
         }
-    }
+    } 
 
     private void SetMaskWidth(float width)
     {
@@ -83,6 +90,33 @@ public class LoadingSceneController : MonoBehaviour
     private void SetLoadingBarGrassRollInvisible()
     {
         loadingBarGrassRoll.enabled = false;
+    }
+    
+    private void StartLoadingMenuBgm()
+    {
+        AudioManager.Instance.PlayBGM("LoadingMenuBgm");
+    }
+
+    private void UpdateLoadingButton()
+    {
+        loadingButtonText.text = "Start game!";
+    }
+
+    private void DisableLoadingButton()
+    {
+        loadingButton.enabled = false;
+    }
+
+    private void EnableLoadingButton()
+    {
+        loadingButton.enabled = true;
+    }
+
+    public void OnLoadingButtonClicked()
+    {
+        AudioManager.Instance.PlayFx("ButtonClicked");
+        SceneManager.LoadScene("MenuScene");
+        AudioManager.Instance.StopBGM();
     }
 
 }
