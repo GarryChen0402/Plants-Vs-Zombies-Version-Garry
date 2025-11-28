@@ -4,3 +4,6 @@
 # Resources
 Resources/
 TextMesh Pro/
+
+# assets
+*.asset
