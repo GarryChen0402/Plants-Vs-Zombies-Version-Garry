@@ -19,6 +19,4 @@ public class SoundEffect : ScriptableObject
         if (clips.Length == 0) return null;
         return clips[Random.Range(0, clips.Length)];
     }
-
-
 }
