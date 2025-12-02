@@ -557,6 +557,8 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 97d6ceb0b9cfc5c48bee3c7ac821ec6a, type: 2}
   - {fileID: 11400000, guid: af39c7abc4bb07f4c9f4a615882741d2, type: 2}
+  - {fileID: 11400000, guid: d15109a8cfa08344987305b1e452bac5, type: 2}
+  - {fileID: 11400000, guid: b46e8acd6732ca546b9a030554aa2d7f, type: 2}
   currentBgm: {fileID: 728853531}
 --- !u!4 &728853530
 Transform:

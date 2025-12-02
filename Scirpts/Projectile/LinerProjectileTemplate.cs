@@ -18,13 +18,14 @@ public class LinerProjectileTemplate : MonoBehaviour
 
     //Speed
     [SerializeField]
-    private float moveSpeed;
+    protected float moveSpeed;
     [SerializeField]
-    private float rotationSpeed;
+    protected float rotationSpeed;
     [SerializeField]
-    private int moveDir;
+    protected int moveDir;
     [SerializeField]
-    private float projectileHeight;
+    protected float projectileHeight;
+    protected float attackDamage;
 
     public float MoveSpeed {
         get
@@ -59,6 +60,11 @@ public class LinerProjectileTemplate : MonoBehaviour
         }
     }
 
+    public float AttackDamage
+    {
+        get { return attackDamage; }
+        set { attackDamage = value; }
+    }
     //public string TargetTag {  get; set; }
 
     private void Awake()
@@ -74,17 +80,17 @@ public class LinerProjectileTemplate : MonoBehaviour
     {
         MoveUpdate();
         RotateUpdate();
-        ProjectileHeightUpdate();
+        //ProjectileHeightUpdate();
     }
 
-    private void InitProjectile()
+    protected void InitProjectile()
     {
         projectile.GetComponent<Transform>().SetLocalPositionAndRotation(new Vector3(0, 1, 0), Quaternion.identity);
-        projectileHeight = 1f;
+        //projectileHeight = 1f;
         SetProjectileHeight(projectileHeight);
     }
 
-    private void InitProjectileCollider()
+    protected void InitProjectileCollider()
     {
         projectileCircleCollider2D = GetComponent<CircleCollider2D>();
         projectileCircleCollider2D.radius = projectile.GetComponent<SpriteRenderer>().size.x;
@@ -92,25 +98,25 @@ public class LinerProjectileTemplate : MonoBehaviour
         //Debug.Log(projectile.GetComponent<SpriteRenderer>().size);
     }
 
-    private void MoveUpdate()
+    protected void MoveUpdate()
     {
         if(moveDir == 1)transform.Translate(Vector3.right *  moveSpeed * Time.deltaTime);
         else if(moveDir == -1)transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
     }
 
-    private void RotateUpdate()
+    protected void RotateUpdate()
     {
-        projectile.transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        projectile.transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
     }
 
-    private void ProjectileHeightUpdate()
+    protected void ProjectileHeightUpdate()
     {
         SetProjectileHeight(projectileHeight);
     }
 
 
 
-    private void SetProjectileHeight(float value = 1.0f)
+    protected void SetProjectileHeight(float value = 1.0f)
     {
         Vector3 position = projectile.transform.localPosition;
         //Quaternion rotation = Quaternion.identity;
@@ -118,19 +124,22 @@ public class LinerProjectileTemplate : MonoBehaviour
         //position.x = 0;
         projectile.GetComponent<Transform>().SetLocalPositionAndRotation(position, Quaternion.identity);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
+        OnBroken();
         moveDir = 0;
         Debug.Log("Collision has enter.");
-        OnBroken();
     }
 
     protected virtual void OnBroken()
     {
         Destroy(gameObject);
-        GameObject go = GameObject.Instantiate(brokenEffectPrefab, projectile.transform.position, Quaternion.identity);
-        go.GetComponent<PeaBulletBroken>().MoveSpeed = moveDir;
-        Destroy(go, 1);
     }
+    //{
+    //    Destroy(gameObject);
+    //    //GameObject go = GameObject.Instantiate(brokenEffectPrefab, projectile.transform.position, Quaternion.identity);
+    //    //go.GetComponent<PeaBulletBroken>().MoveDir = moveDir;
+    //    //Destroy(go, 1);
+    //}
 
 }

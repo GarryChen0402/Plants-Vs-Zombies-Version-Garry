@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AudioManager : MonoBehaviour
 {
@@ -66,7 +67,7 @@ public class AudioManager : MonoBehaviour
         currentBgm.Stop();
     }
 
-    public void PlayFx(string name, Vector3 position)
+    public void PlayFx(string name, Vector3 position, float volume)
     {
         if (!_dictionaryEffects.ContainsKey(name))
         {
@@ -74,14 +75,38 @@ public class AudioManager : MonoBehaviour
         }
 
         SoundEffect effect = _dictionaryEffects[name];
-        AudioSource.PlayClipAtPoint(effect.GetRandomClip(), position);
+        AudioSource.PlayClipAtPoint(effect.GetRandomClip(), position, volume);
     }
 
-    public void PlayFx(string name)
+    public void PlayFx(string name, float volume = 0.5f)
     {
         if (_listener == null) _listener = FindFirstObjectByType<AudioListener>();
 
-        PlayFx(name, _listener.transform.position);
+        PlayFx(name, _listener.transform.position, volume);
+    }
+
+    public void PlayFxAtTime(string name, float time, float volume = 0.5f)
+    {
+        if (_listener == null) _listener = FindFirstObjectByType<AudioListener>();
+        if (!_dictionaryEffects.ContainsKey(name))
+        {
+            return;
+        }
+
+        SoundEffect effect = _dictionaryEffects[name];
+        //AudioSource.PlayClipAtPoint(effect.GetRandomClip(), _listener.transform.position, volume);
+
+        GameObject gameObject = new GameObject("One shot audio");
+        gameObject.transform.position = _listener.transform.position;
+        AudioSource audioSource = (AudioSource)gameObject.AddComponent(typeof(AudioSource));
+        AudioClip clip = effect.GetRandomClip();
+        audioSource.clip = clip;
+        audioSource.spatialBlend = 1f;
+        audioSource.time = time;
+        audioSource.volume = volume;
+        audioSource.Play();
+        Object.Destroy(gameObject, clip.length * ((Time.timeScale < 0.01f) ? 0.01f : Time.timeScale));
+
     }
 
 

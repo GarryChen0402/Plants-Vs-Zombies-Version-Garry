@@ -6,9 +6,9 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
     public int PlantId{ get; private set; }
-    public int MaxHP { get; private set; }
+    public float MaxHP { get; private set; }
 
-    private int CurrentHP { get; set; }
+    public float CurrentHP { get; set; }
 
     public string PlantName { get; private set; }
 
@@ -17,18 +17,18 @@ public class Plant : MonoBehaviour
     public int Level {  get; private set; }
 
     // ‹…À
-    public virtual void Attack(int value)
+    protected virtual void GetDamage(float value)
     {
         CurrentHP -= value;
     }
     //÷Œ¡∆
-    public virtual void Heal(int value)
+    protected virtual void Heal(float value)
     {
         CurrentHP += value;
         CurrentHP = math.min(CurrentHP, MaxHP);
     }
-    
-    public virtual void Dead()
+
+    protected virtual void Dead()
     {
         Destroy(gameObject);
     }
