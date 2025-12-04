@@ -16,7 +16,7 @@ public class PeaBullet : LinerProjectileTemplate
     protected override void OnBroken()
     {
         Debug.Log("Peabullet on broken");
-        AudioManager.Instance.PlayFx("PeaBulletHit");
+        AudioManager.Instance?.PlayFx("PeaBulletHit");
         Destroy(gameObject);
         GameObject go = GameObject.Instantiate(brokenEffectPrefab, projectile.transform.position, Quaternion.identity);
         go.GetComponent<PeaBulletBroken>().MoveDir = MoveDir;

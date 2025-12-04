@@ -27,6 +27,7 @@ public class LinerProjectileTemplate : MonoBehaviour
     protected float projectileHeight;
     protected float attackDamage;
 
+    protected string targetTag;
     public float MoveSpeed {
         get
         {
@@ -65,7 +66,11 @@ public class LinerProjectileTemplate : MonoBehaviour
         get { return attackDamage; }
         set { attackDamage = value; }
     }
-    //public string TargetTag {  get; set; }
+    public string TargetTag
+    {
+        get { return targetTag; }
+        set { targetTag = value; }
+    }
 
     private void Awake()
     {
@@ -126,6 +131,7 @@ public class LinerProjectileTemplate : MonoBehaviour
     }
     protected void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag != targetTag) return;
         OnBroken();
         moveDir = 0;
         Debug.Log("Collision has enter.");

@@ -114,9 +114,9 @@ public class LoadingSceneController : MonoBehaviour
 
     public void OnLoadingButtonClicked()
     {
-        AudioManager.Instance.PlayFx("ButtonClicked");
-        SceneManager.LoadScene("MenuScene");
         AudioManager.Instance.StopBGM();
+        SceneManager.LoadScene("MenuScene");
+        AudioManager.Instance.PlayFx("ButtonClicked");
     }
 
 }

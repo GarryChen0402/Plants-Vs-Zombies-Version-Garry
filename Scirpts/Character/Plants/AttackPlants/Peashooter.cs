@@ -9,10 +9,13 @@ public class Peashooter : AttackPlant
     private float fxPlayTimePoint;
     private void Awake()
     {
+        PlantId = 1;
         AttackDamange = 10;
         AttackCD = 2f;
         attackTimer = 0f;
         fxPlayTimePoint = 0.32f;
+        MaxHP = 100;
+
         animator = GetComponent<Animator>();
         //animator.enabled = true;
         DisableAnimator();
@@ -39,8 +42,9 @@ public class Peashooter : AttackPlant
         position.x += 0.45f;
         position.y -= 0.40f;
         GameObject go = GameObject.Instantiate(projectilePrefab, position, Quaternion.identity);
-        go.GetComponent<LinerProjectileTemplate>().MoveDir = 1;
-        AudioManager.Instance.PlayFxAtTime("PeashooterAttack", fxPlayTimePoint, 0.5f);
+        go.GetComponent<PeaBullet>().MoveDir = 1;
+        go.GetComponent<PeaBullet>().TargetTag = "Zombies";
+        AudioManager.Instance?.PlayFxAtTime("PeashooterAttack", fxPlayTimePoint, 0.5f);
     }
 
     private void DisableAnimator()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 
@@ -19,13 +20,13 @@ public class SunManager : MonoBehaviour
     [SerializeField] private bool canSunGenerate;
     [SerializeField] private float sunGenerateTime;
     private float curSunGenerateTime;
-    private float sunGenerateHeight;
+    //private float sunGenerateHeight;
     [SerializeField] private float sunFallSpeed;
 
-
+    public List<GameObject> sunPoints;
     public static SunManager Instance { get; private set; }
-    
 
+    public const int maxLivingSunPointsCount = 20;
     public int SunPoint
     {
         get { return sunPoint; }
@@ -39,9 +40,11 @@ public class SunManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         sunGenerateTime = 5f;
-        sunGenerateHeight = 6f;
+        //sunGenerateHeight = 6f;
         sunFallSpeed = 1f;
         canSunGenerate = true;
+
+        sunPoints = new List<GameObject>();
         //sunCollectTime = 5f;
         //curSunCollectTime = 0f;
     }
@@ -86,11 +89,13 @@ public class SunManager : MonoBehaviour
             Debug.Log("The sunPointPrefab is a null pointer... check your inspector of sunManager");
             return;
         }
+        if (sunPoints.Count == maxLivingSunPointsCount) return;
         float x = Random.Range(-4f, 5.5f);
         GameObject go = GameObject.Instantiate(sunPointPrefab, new Vector3(x, 6, 0), Quaternion.identity);
         go.GetComponent<SunPoint>().CanFall = true;
         go.GetComponent<SunPoint>().FallHeight = Random.Range(2.5f, -4);
         go.GetComponent<SunPoint>().FallSpeed = sunFallSpeed;
+        sunPoints.Add(go);
     }
 
     private void SunGenerateUpdate()

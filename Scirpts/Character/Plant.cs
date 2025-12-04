@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
-    public int PlantId{ get; private set; }
-    public float MaxHP { get; private set; }
+    protected int PlantId{ get;  set; }
+    protected float MaxHP { get;  set; }
 
     public float CurrentHP { get; set; }
 
-    public string PlantName { get; private set; }
+    protected string PlantName { get;  set; }
 
-    public string plantDescription { get; private set; }
+    public string plantDescription { get;  set; }
 
-    public int Level {  get; private set; }
+    public int Level {  get;  set; }
 
     // ‹…À
     protected virtual void GetDamage(float value)

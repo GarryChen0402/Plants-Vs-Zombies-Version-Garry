@@ -36,6 +36,7 @@ public class AudioManager : MonoBehaviour
 
     }
 
+
     public void PlayBGM(string name)
     {
         if(_listener == null)_listener = FindFirstObjectByType<AudioListener>();
