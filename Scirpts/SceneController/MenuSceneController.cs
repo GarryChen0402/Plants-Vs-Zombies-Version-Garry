@@ -7,10 +7,11 @@ public class MenuSceneController : MonoBehaviour
 {
     private void Awake()
     {
-        AudioManager.Instance.PlayBGM("MenuBgm");
+        AudioManager.Instance?.PlayBGM("MenuBgm");
     }
     public void OnTestLevelButtonClicked()
     {
         SceneManager.LoadScene("Level-test");
+        AudioManager.Instance?.PlayFx("ButtonClicked");
     }
 }

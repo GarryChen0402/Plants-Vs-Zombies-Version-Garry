@@ -18,8 +18,8 @@ public class LoadingSceneController : MonoBehaviour
     private float currentLoadingBarGrassMaskWidth;
 
     public Image loadingBarGrassRoll;
-    private const float loadingBarGrassRollStartPositionX = 205f;
-    private const float loadingBarGrassRollEndPositionX = 505f;
+    private const float loadingBarGrassRollStartPositionX = 240;
+    private const float loadingBarGrassRollEndPositionX = 540f;
     private const float loadingBarGrassRollPathLength = 300f;
     private float loadingBarGrassRollSpeed;
     private float currentLoadingBarGrassRollPositionX;

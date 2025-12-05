@@ -108,5 +108,10 @@ public class SunManager : MonoBehaviour
         }
     }
 
+    public void CollectAllSunPoints()
+    {
+        foreach (GameObject sp in sunPoints) sp.GetComponent<SunPoint>().OnSunPointClicked();
+    }
+
 
 }
