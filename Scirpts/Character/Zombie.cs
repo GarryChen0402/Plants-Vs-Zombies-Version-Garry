@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected float maxHP;
+    [SerializeField] protected float curHP;
+    protected float attackDamage;
+    protected string targetTag;
+
+    protected float attackCD;
+    protected float attackTimer;
+
+    public float AttackDamage => attackDamage;
+
+
+    public virtual void Hurt(float value)
     {
-        
+        Debug.Log("The function : Hurt in Zombie, it should not be called, please override it in subclass");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

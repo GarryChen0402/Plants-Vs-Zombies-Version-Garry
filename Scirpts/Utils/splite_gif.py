@@ -58,7 +58,7 @@ class GifSpliter:
 
 
 if __name__ == '__main__':
-    gifSpliter = GifSpliter('C:/Users/gyc20/Desktop/PVZ史上最完整素材（B站）/植物大战僵尸素材包第二版/植物/')
+    gifSpliter = GifSpliter('C:/Users/gyc20/Desktop/PVZ史上最完整素材（B站）/僵尸/')
     for path in gifSpliter.gif_list:
         print(path)
         gifSpliter._split_single_gif(path)

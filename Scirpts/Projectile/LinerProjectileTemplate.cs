@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.IO.LowLevel.Unsafe;
-using Unity.VisualScripting.Dependencies.NCalc;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class LinerProjectileTemplate : MonoBehaviour
@@ -107,6 +103,7 @@ public class LinerProjectileTemplate : MonoBehaviour
     {
         if(moveDir == 1)transform.Translate(Vector3.right *  moveSpeed * Time.deltaTime);
         else if(moveDir == -1)transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        if (math.abs(transform.position.x) >= 12f || math.abs(transform.position.y) >= 8f) OnBroken();
     }
 
     protected void RotateUpdate()
@@ -129,7 +126,7 @@ public class LinerProjectileTemplate : MonoBehaviour
         //position.x = 0;
         projectile.GetComponent<Transform>().SetLocalPositionAndRotation(position, Quaternion.identity);
     }
-    protected void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag != targetTag) return;
         OnBroken();

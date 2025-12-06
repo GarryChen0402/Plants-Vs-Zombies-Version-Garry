@@ -12,6 +12,8 @@ public class Sunflower : ProductPlant
         productTimer = 0f;
         canProduce = true;
         animator = GetComponent<Animator>();
+        MaxHP = 100;
+        curHP = MaxHP;
     }
 
     protected override void ProductResourceUpdate()

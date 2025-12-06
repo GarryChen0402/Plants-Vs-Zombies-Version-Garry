@@ -15,6 +15,7 @@ public class Peashooter : AttackPlant
         attackTimer = 0f;
         fxPlayTimePoint = 0.32f;
         MaxHP = 100;
+        CurrentHP = MaxHP;
 
         animator = GetComponent<Animator>();
         //animator.enabled = true;

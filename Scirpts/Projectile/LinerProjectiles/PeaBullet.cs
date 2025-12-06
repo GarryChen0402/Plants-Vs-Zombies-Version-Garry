@@ -15,12 +15,22 @@ public class PeaBullet : LinerProjectileTemplate
 
     protected override void OnBroken()
     {
-        Debug.Log("Peabullet on broken");
+        //Debug.Log("Peabullet on broken");
         AudioManager.Instance?.PlayFx("PeaBulletHit");
         Destroy(gameObject);
         GameObject go = GameObject.Instantiate(brokenEffectPrefab, projectile.transform.position, Quaternion.identity);
         go.GetComponent<PeaBulletBroken>().MoveDir = MoveDir;
         //Destroy(go, )
         //base.OnBroken();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Debug.Log("Peabullet collision : " + collision.tag);
+        if(collision.tag == targetTag)
+        {
+            if (collision.tag == "Zombies") collision.GetComponent<Zombie>().Hurt(AttackDamage);
+            OnBroken();
+        }
     }
 }

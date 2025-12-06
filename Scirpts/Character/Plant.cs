@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
+    [SerializeField]  protected float curHP;
+
     protected int PlantId{ get;  set; }
     protected float MaxHP { get;  set; }
 
-    public float CurrentHP { get; set; }
+    public float CurrentHP
+    {
+        get { return curHP; }
+        set { curHP = value; }
+    }
 
     protected string PlantName { get;  set; }
 
@@ -17,9 +23,11 @@ public class Plant : MonoBehaviour
     public int Level {  get;  set; }
 
     // ‹…À
-    protected virtual void GetDamage(float value)
+    public virtual void GetDamage(float value)
     {
+        Debug.Log("Plnat GetDamage");
         CurrentHP -= value;
+        if (CurrentHP <= 0) Dead();
     }
     //÷Œ¡∆
     protected virtual void Heal(float value)
