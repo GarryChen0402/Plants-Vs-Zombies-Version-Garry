@@ -48,7 +48,7 @@ public class CommonZombie : Zombie
         attackDamage = 10;
         targetTag = "Plants";
         attackCD = 2f;
-        attackTimer = 0;
+        attackTimer = attackCD;
         hasHead = true;
         move_speed = 0.2f;
     }
