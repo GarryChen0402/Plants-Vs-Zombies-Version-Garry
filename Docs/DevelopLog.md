@@ -236,3 +236,19 @@ A: 原因：Game视窗下，之前的分辨率设置为了4：3 aspect ， 会�
 2. 为植物添加了cost成员， 用于记录对应植物种植需要花费的阳光点数
 
 ![1765514255705](image/DevelopLog/1765514255705.png)
+
+
+#### 学习记录
+
+Q：如何通过代码， 获取当前脚本挂载对象的子对象
+A：
+方式1：通过Find方法， 查找指定名称的子物体(可以使用层级的路径)
+```
+transform.Find("ChildCube")?.gameObject;
+transform.Find("ChildGroup/GrandChildSphere")?.gameObject;
+```
+
+方式2: 通过GetChild() 方法， 按照顺序获取子对象
+```
+father.transform.GetChild(i);
+```
