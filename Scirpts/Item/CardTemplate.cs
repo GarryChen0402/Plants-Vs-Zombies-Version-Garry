@@ -74,7 +74,7 @@ public class CardTemplate : MonoBehaviour
 
     private void ReadyUpdate()
     {
-
+        if (SunManager.Instance.SunPoint < plantCost) SwitchToNoSunPoint();
     }
 
 
@@ -109,12 +109,26 @@ public class CardTemplate : MonoBehaviour
 
     public void OnClicked()
     {
-        Debug.Log("You have clicked the card of " +  plantPrefab.name.ToString() + plantCost.ToString());
+        Debug.Log("You have clicked the card of " + plantPrefab.name.ToString() + plantCost.ToString());
+        if (cardState == CardState.Ready)
+        {
+            GameObject go = GameObject.Instantiate(plantPrefab);
+            go.GetComponent<Animator>().enabled = false;
+            AudioManager.Instance?.PlayFx("ButtonClicked");
+            HandManager.Instance.HoldPlant(gameObject, go);
+        }
         //Only for test
         //if (cardState == CardState.Ready)
         //{
         //    SwitchToLoading();
         //    SunManager.Instance.SunPoint -= plantCost;
         //}
+    }
+
+    public void BePlanted()
+    {
+        AudioManager.Instance?.PlayFx("BePlanted");
+        SwitchToLoading();
+        SunManager.Instance.SunPoint -= plantCost;
     }
 }

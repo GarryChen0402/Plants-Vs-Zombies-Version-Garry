@@ -12,6 +12,5 @@ public class CardSunflower : CardTemplate
         cardColor = transform.Find("plant_color")?.gameObject;
         cardGray = transform.Find("plant_gray")?.gameObject;
         cardMask = transform.Find("plant_mask")?.gameObject;
-
     }
 }

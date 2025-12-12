@@ -40,6 +40,7 @@ public class SunManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         sunGenerateTime = 5f;
+        SunPoint = 50;
         //sunGenerateHeight = 6f;
         sunFallSpeed = 1f;
         canSunGenerate = true;

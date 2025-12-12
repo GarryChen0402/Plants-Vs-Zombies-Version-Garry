@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlantsManager : MonoBehaviour
 {
-
     private void Start()
     {
         
