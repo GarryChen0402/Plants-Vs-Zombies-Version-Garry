@@ -18,6 +18,7 @@ public class Peashooter : AttackPlant
         CurrentHP = MaxHP;
 
         animator = GetComponent<Animator>();
+        cost = 100;
         //animator.enabled = true;
         DisableAnimator();
     }

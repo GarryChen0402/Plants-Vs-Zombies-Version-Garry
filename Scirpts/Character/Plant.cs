@@ -22,6 +22,8 @@ public class Plant : MonoBehaviour
 
     public int Level {  get;  set; }
 
+    public int cost;
+
     // ‹…À
     public virtual void GetDamage(float value)
     {
