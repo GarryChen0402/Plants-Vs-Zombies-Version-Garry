@@ -85,7 +85,7 @@ public class CardTemplate : MonoBehaviour
         cardGray.GetComponent<Image>().enabled = true;
         cardMask.GetComponent <Image>().enabled = true;
         plantTimer = 0;
-        Debug.Log("Loading card");
+        //Debug.Log("Loading card");
     }
 
     private void SwitchToNoSunPoint()
@@ -94,7 +94,7 @@ public class CardTemplate : MonoBehaviour
         cardColor.GetComponent<Image>().enabled = false;
         cardGray.GetComponent<Image>().enabled = true;
         cardMask.GetComponent<Image>().enabled = false;
-        Debug.Log("NoSunPoint card");
+        //Debug.Log("NoSunPoint card");
     }
 
     private void SwitchToReady()
@@ -103,13 +103,13 @@ public class CardTemplate : MonoBehaviour
         cardColor.GetComponent<Image>().enabled = true;
         cardGray.GetComponent<Image>().enabled = false;
         cardMask.GetComponent <Image>().enabled = false;
-        Debug.Log("Ready card");
+        //Debug.Log("Ready card");
     }
 
 
     public void OnClicked()
     {
-        Debug.Log("You have clicked the card of " + plantPrefab.name.ToString() + plantCost.ToString());
+        //Debug.Log("You have clicked the card of " + plantPrefab.name.ToString() + plantCost.ToString());
         if (cardState == CardState.Ready)
         {
             GameObject go = GameObject.Instantiate(plantPrefab);

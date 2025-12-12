@@ -9,25 +9,22 @@ public class LeveSceneController : MonoBehaviour
     {
         AudioManager.Instance?.PlayBGM("GrassBgm");
     }
-
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     public void OnMenuButtonClick()
     {
         SceneManager.LoadScene("MenuScene");
+    }
+
+    private void Update()
+    {
+        PlantsAndZombiesUpdate();
+    }
+
+    private void PlantsAndZombiesUpdate()
+    {
+        for(int i = 0;i < ZombieManager.Instance.livingZombies.Count; i++)
+        {
+            if (ZombieManager.Instance.livingZombies[i].Count == 0) PlantsManager.Instance.DisableAttack(i);
+            else PlantsManager.Instance.EnableAttack(i);
+        }
     }
 }

@@ -236,10 +236,14 @@ A: 原因：Game视窗下，之前的分辨率设置为了4：3 aspect ， 会�
 2. 为植物添加了cost成员， 用于记录对应植物种植需要花费的阳光点数
 3. 添加了HandManager 类， 用于管理鼠标的操作， 例如： 植物种植卡片的点击， 植物的种植等
 4. 完成了正常游戏过程中植物的种植操作
+5. 添加了ZombieManager单例类，用于管理场景中僵尸的生成和每行僵尸的添加和销毁
+6. 为LevelSceneController添加了对僵尸和植物交互的相关控制， 现在攻击型植物仅在当前行中有僵尸（敌人）时发起攻击。
 
 
 ![1765514255705](image/DevelopLog/1765514255705.png)
 ![植物的种植](image/DevelopLog/1765532595172.png)
+![1765546530943](image/DevelopLog/1765546530943.png)
+
 
 #### 学习记录
 
@@ -254,4 +258,15 @@ transform.Find("ChildGroup/GrandChildSphere")?.gameObject;
 方式2: 通过GetChild() 方法， 按照顺序获取子对象
 ```
 father.transform.GetChild(i);
+```
+
+Q: 如何通过代码， 判断当前的实例是否是某一类的子类
+A: IsSubClassOf
+```
+Plant curPlant = cellMatrix.cellRows[idx].cells[i].currentPlant.GetComponent<Plant>() ;
+if (curPlant.GetType().IsSubclassOf(typeof(AttackPlant)))
+{
+    AttackPlant atkPlant = (AttackPlant) curPlant;
+    atkPlant.canAttack = false;
+}
 ```

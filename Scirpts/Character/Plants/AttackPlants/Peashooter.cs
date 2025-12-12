@@ -10,7 +10,7 @@ public class Peashooter : AttackPlant
     private void Awake()
     {
         PlantId = 1;
-        AttackDamange = 10;
+        AttackDamange = 25;
         AttackCD = 2f;
         attackTimer = 0f;
         fxPlayTimePoint = 0.32f;
@@ -46,6 +46,7 @@ public class Peashooter : AttackPlant
         GameObject go = GameObject.Instantiate(projectilePrefab, position, Quaternion.identity);
         go.GetComponent<PeaBullet>().MoveDir = 1;
         go.GetComponent<PeaBullet>().TargetTag = "Zombies";
+        go.GetComponent<PeaBullet>().AttackDamage = attackDamange;
         AudioManager.Instance?.PlayFxAtTime("PeashooterAttack", fxPlayTimePoint, 0.5f);
     }
 

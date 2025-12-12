@@ -8,7 +8,7 @@ public class Sunflower : ProductPlant
     private Animator animator;
     private void Awake()
     {
-        productCD = 5f;
+        productCD = 10f;
         productTimer = 0f;
         canProduce = true;
         animator = GetComponent<Animator>();

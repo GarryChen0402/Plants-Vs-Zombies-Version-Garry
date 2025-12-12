@@ -6,7 +6,7 @@ public class Cell : MonoBehaviour
 {
     public int row;
     public int col;
-    public Plant currentPlant;
+    public GameObject currentPlant;
 
     //private void OnMouseDown()
     //{

@@ -10,7 +10,7 @@ public class AttackPlant : Plant
     protected float attackCD;
     protected float attackTimer;
     [SerializeField]
-    protected bool canAttack;
+    public bool canAttack;
     [SerializeField]
     protected float attackDamange;
 

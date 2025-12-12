@@ -12,6 +12,8 @@ public class Zombie : MonoBehaviour
     protected float attackCD;
     protected float attackTimer;
 
+    public int ZombieId;
+
     public float AttackDamage => attackDamage;
 
 

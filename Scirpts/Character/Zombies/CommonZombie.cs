@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 enum CommonZombieState
 {
@@ -50,7 +47,7 @@ public class CommonZombie : Zombie
         attackCD = 2f;
         attackTimer = attackCD;
         hasHead = true;
-        move_speed = 0.2f;
+        move_speed = 0.15f;
     }
 
     private void Start()
@@ -81,8 +78,8 @@ public class CommonZombie : Zombie
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
-        if(collision.tag == targetTag)
+        //Debug.Log(collision.tag);
+        if(collision.tag.Equals(targetTag))
         {
 
             //currentEatPlant = collision.gameObject;
@@ -93,7 +90,7 @@ public class CommonZombie : Zombie
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == targetTag)
+        if(collision.tag.Equals(targetTag))
         {
             currentEatPlant = null;
             SwitchToWalk();
@@ -161,6 +158,7 @@ public class CommonZombie : Zombie
 
     public void PostDead()
     {
+        ZombieManager.Instance.RemoveDeadZombie(gameObject);
         Destroy(gameObject, 1);
     }
 
@@ -168,7 +166,7 @@ public class CommonZombie : Zombie
     {
         if (!hasHead) return;
         hasHead = false;
-        Debug.Log("Common Zombie Lost its head...");
+        //Debug.Log("Common Zombie Lost its head...");
         Vector3 position = transform.position;
         position.x += 0.7f;
         position.y -= 0.35f;
