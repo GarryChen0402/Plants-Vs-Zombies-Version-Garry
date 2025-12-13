@@ -9,6 +9,13 @@ public class Zombie : MonoBehaviour
     protected float attackDamage;
     protected string targetTag;
 
+    protected bool canMove;
+    public bool CanMove
+    {
+        get => canMove;
+        set => canMove = value;
+    }
+
     protected float attackCD;
     protected float attackTimer;
 
@@ -22,5 +29,8 @@ public class Zombie : MonoBehaviour
         Debug.Log("The function : Hurt in Zombie, it should not be called, please override it in subclass");
     }
 
-
+    protected void EnterTheHouse()
+    {
+        LeveSceneController.Instance.GameLose();
+    }
 }

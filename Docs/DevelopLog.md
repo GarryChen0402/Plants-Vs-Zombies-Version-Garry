@@ -270,3 +270,10 @@ if (curPlant.GetType().IsSubclassOf(typeof(AttackPlant)))
     atkPlant.canAttack = false;
 }
 ```
+
+---
+
+#### 开发记录
+1. 为关卡场景添加不同状态，完成游戏开始时摄像机的左右移动，展示地图
+2. 为ZombieManager和PlantManager添加了方法，用于管理场景中的植物和僵尸， 例如， 游戏结束时， 场景中所有僵尸和植物应当停止动画
+

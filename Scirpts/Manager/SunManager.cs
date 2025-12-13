@@ -25,6 +25,11 @@ public class SunManager : MonoBehaviour
 
     public List<GameObject> sunPoints;
     public static SunManager Instance { get; private set; }
+    public bool CanProduce
+    {
+        get => canSunGenerate;
+        set => canSunGenerate = value;
+    }
 
     public const int maxLivingSunPointsCount = 20;
     public int SunPoint

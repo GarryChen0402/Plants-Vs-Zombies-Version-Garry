@@ -14,6 +14,8 @@ public class ZombieManager : MonoBehaviour
 
     private const int MaxZombieEachRow = 100;
 
+    public bool CanGenerateZombie;
+
     [SerializeField] private int maxZombiesNumber;
     [SerializeField] private int curZombiesNumber;
 
@@ -30,11 +32,13 @@ public class ZombieManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-            spawnTimer = 0;
+
+        spawnTimer = 0;
         livingZombies = new List<List<GameObject>>();
         for(int i = 0; i < zombieSpawnPoints.Count; i++)livingZombies.Add(new List<GameObject>());
         maxZombiesNumber = 10;
         curZombiesNumber = 0;
+        EnableZombieGenerate();
     }
 
 
@@ -44,7 +48,9 @@ public class ZombieManager : MonoBehaviour
         spawnTimer += Time.deltaTime;
         if(spawnTimer > spawnCD)
         {
+
             spawnTimer -= spawnCD;
+            
             GenerateSingleZombie();
         }
     }
@@ -52,6 +58,7 @@ public class ZombieManager : MonoBehaviour
 
     private void GenerateSingleZombie()
     {
+        if (!CanGenerateZombie) return;
         if (curZombiesNumber >= maxZombiesNumber) return;
         curZombiesNumber++;
         //int size = zombieSpawnPoints.Count;
@@ -80,5 +87,42 @@ public class ZombieManager : MonoBehaviour
         }
         Debug.Log("Check over");
     }
+
+    public void DisableZombies()
+    {
+        foreach(var zombies in livingZombies)
+        {
+            foreach(var zombie in zombies)
+            {
+                zombie.GetComponent<Animator>().enabled = false;
+                zombie.GetComponent<Zombie>().CanMove = false;
+            }
+        }
+        CanGenerateZombie = false;
+    }
+
+    public void EnableZombies()
+    {
+        foreach (var zombies in livingZombies)
+        {
+            foreach (var zombie in zombies)
+            {
+                zombie.GetComponent<Animator>().enabled = true;
+                zombie.GetComponent<Zombie>().CanMove = true;
+            }
+        }
+        CanGenerateZombie = true;
+    }
+
+    public void EnableZombieGenerate()
+    {
+        CanGenerateZombie = true;
+    }
+
+    public void DisableZombieGenerate()
+    {
+        CanGenerateZombie = false;
+    }
+
 
 }

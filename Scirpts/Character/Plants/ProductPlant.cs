@@ -15,6 +15,12 @@ public class ProductPlant : Plant
     //[SerializeField]
     //protected float attackDamange;
 
+    public bool CanProduce
+    {
+        get => canProduce;
+        set => canProduce = value;
+    }
+
     private void Update()
     {
         if (canProduce) ProductResourceUpdate();

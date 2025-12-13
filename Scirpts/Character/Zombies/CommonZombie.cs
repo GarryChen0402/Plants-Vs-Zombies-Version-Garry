@@ -48,6 +48,7 @@ public class CommonZombie : Zombie
         attackTimer = attackCD;
         hasHead = true;
         move_speed = 0.15f;
+        canMove = true;
     }
 
     private void Start()
@@ -78,13 +79,17 @@ public class CommonZombie : Zombie
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log(collision.tag);
-        if(collision.tag.Equals(targetTag))
+        Debug.Log(collision.tag);
+        if (collision.tag.Equals(targetTag))
         {
 
             //currentEatPlant = collision.gameObject;
             currentEatPlant = collision.gameObject.GetComponent<Plant>();
             SwitchToEat();
+        }
+        else if (collision.tag.Equals("House"))
+        {
+            EnterTheHouse();
         }
     }
 
@@ -94,13 +99,13 @@ public class CommonZombie : Zombie
         {
             currentEatPlant = null;
             SwitchToWalk();
-
         }
     }
 
 
     private void WalkUpdate()
     {
+        if (!canMove) return;
         //transform.Translate(Vector3.left)
         if(facingRight)transform.Translate(Vector3.right * move_speed * Time.deltaTime);
         else transform.Translate(Vector3.left * move_speed * Time.deltaTime);

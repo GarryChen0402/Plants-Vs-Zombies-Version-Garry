@@ -87,4 +87,79 @@ public class PlantsManager : MonoBehaviour
         for (int i = 0; i < cellMatrix.rows; i++) EnableAttack(i);
     }
 
+    public void DisableGenerate()
+    {
+        if (cellMatrix == null)
+        {
+            Debug.Log("Cell matrix is null..");
+            return;
+        }
+        for (int i = 0; i < cellMatrix.rows; i++) DisableGenerate(i);
+    }
+
+    public void DisableGenerate(int idx)
+    {
+        if (idx < 0 || idx >= cellMatrix.rows)
+        {
+            Debug.Log("out of index...");
+            return;
+        }
+
+        for (int i = 0; i < cellMatrix.cellRows[idx].cells.Count; i++)
+        {
+            if (cellMatrix.cellRows[idx].cells[i].currentPlant != null)
+            {
+                Plant curPlant = cellMatrix.cellRows[idx].cells[i].currentPlant.GetComponent<Plant>();
+                if (curPlant.GetType().IsSubclassOf(typeof(ProductPlant)))
+                {
+                    ProductPlant productPlant= (ProductPlant)curPlant;
+                    productPlant.CanProduce = false;
+                }
+            }
+        }
+    }
+
+    public void EnableGenerate()
+    {
+        if (cellMatrix == null)
+        {
+            Debug.Log("Cell matrix is null..");
+            return;
+        }
+        for (int i = 0; i < cellMatrix.rows; i++) EnableGenerate(i);
+    }
+
+    public void EnableGenerate(int idx)
+    {
+        if (idx < 0 || idx >= cellMatrix.rows)
+        {
+            Debug.Log("out of index...");
+            return;
+        }
+
+        for (int i = 0; i < cellMatrix.cellRows[idx].cells.Count; i++)
+        {
+            if (cellMatrix.cellRows[idx].cells[i].currentPlant != null)
+            {
+                Plant curPlant = cellMatrix.cellRows[idx].cells[i].currentPlant.GetComponent<Plant>();
+                if (curPlant.GetType().IsSubclassOf(typeof(ProductPlant)))
+                {
+                    ProductPlant productPlant = (ProductPlant)curPlant;
+                    productPlant.CanProduce = true;
+                }
+            }
+        }
+    }
+
+    public void DisableAllPlants()
+    {
+        DisableAttack();
+        DisableGenerate();
+    }
+
+    public void EnableAllPlants()
+    {
+        EnableAttack();
+        EnableGenerate();
+    }
 }
