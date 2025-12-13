@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 enum GameState
 {
@@ -27,6 +28,8 @@ public class LeveSceneController : MonoBehaviour
 
     private GameState state;
 
+    public Image LoseUI;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -38,6 +41,7 @@ public class LeveSceneController : MonoBehaviour
         leftTarget = -1.5f;
         moveTime = 2;
         moveTimer = 0;
+        LoseUI.gameObject.GetComponent<Animator>().enabled = false;
     }
 
     private void Start()
@@ -74,6 +78,7 @@ public class LeveSceneController : MonoBehaviour
             case GameState.Win:
                 break;
             case GameState.Lose:
+                LoseUpdate();
                 break;
         }
         //PlantsAndZombiesUpdate();
@@ -86,11 +91,15 @@ public class LeveSceneController : MonoBehaviour
             if (ZombieManager.Instance.livingZombies[i].Count == 0) PlantsManager.Instance.DisableAttack(i);
             else PlantsManager.Instance.EnableAttack(i);
         }
+        if (ZombieManager.Instance.allZombieGenerated && ZombieManager.Instance.allZombieCleared) SwitchToGameWinState();
     }
 
     public void GameLose()
     {
         state = GameState.Lose;
+        AudioManager.Instance?.StopBGM();
+        AudioManager.Instance?.PlayFx("GameLose");
+        LoseUI.gameObject.GetComponent<Animator>().enabled = true;
         SwitchToGameEndState();
     }
 
@@ -128,6 +137,14 @@ public class LeveSceneController : MonoBehaviour
         state = GameState.Gaming;
         SunManager.Instance.CanProduce = true;
 
+    }
+
+    private void SwitchToGameWinState()
+    {
+        state = GameState.Win;
+        AudioManager.Instance?.StopBGM();
+        AudioManager.Instance?.PlayFx("GameWin");
+        SwitchToGameEndState();
     }
 
     private void RightMoveUpdate()
@@ -181,5 +198,10 @@ public class LeveSceneController : MonoBehaviour
     private void ReadyUpdate()
     {
         SwitchToGaming();
+    }
+
+    private void LoseUpdate()
+    {
+        
     }
 }

@@ -564,6 +564,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 197cc0305bb6c8e4885b7c65228dd01d, type: 2}
   - {fileID: 11400000, guid: c95a284c95e3b714089d0351162fc964, type: 2}
   - {fileID: 11400000, guid: d0bbd73cc2ccd5c4ab79a762c8d2ada5, type: 2}
+  - {fileID: 11400000, guid: 9ec7bd3725bde6748b40df99d6edc594, type: 2}
+  - {fileID: 11400000, guid: bd16ea37eabc08141bdc5b9e6ccc04d7, type: 2}
   currentBgm: {fileID: 728853531}
 --- !u!4 &728853530
 Transform:

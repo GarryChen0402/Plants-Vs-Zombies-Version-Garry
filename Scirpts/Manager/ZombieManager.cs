@@ -24,6 +24,9 @@ public class ZombieManager : MonoBehaviour
 
     [SerializeField] public List<List<GameObject>> livingZombies;
 
+    public bool allZombieGenerated;
+    public bool allZombieCleared;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -39,6 +42,8 @@ public class ZombieManager : MonoBehaviour
         maxZombiesNumber = 10;
         curZombiesNumber = 0;
         EnableZombieGenerate();
+        allZombieGenerated = false;
+        allZombieCleared = false;
     }
 
 
@@ -59,7 +64,11 @@ public class ZombieManager : MonoBehaviour
     private void GenerateSingleZombie()
     {
         if (!CanGenerateZombie) return;
-        if (curZombiesNumber >= maxZombiesNumber) return;
+        if (curZombiesNumber >= maxZombiesNumber)
+        {
+            allZombieGenerated = true;
+            return;
+        }
         curZombiesNumber++;
         //int size = zombieSpawnPoints.Count;
         int generateRow = Random.Range(0, zombieSpawnPoints.Count);
@@ -76,17 +85,24 @@ public class ZombieManager : MonoBehaviour
         {
             if(zombies.Contains(zombie))zombies.Remove(zombie);
         }
-        //CheckLivingZombies();
+
+        CheckLivingZombies();
     }
 
     private void CheckLivingZombies()
     {
-        Debug.Log("Here is the living zombie information:");
+        //Debug.Log("Here is the living zombie information:");
         foreach(var zombie in livingZombies)
         {
-            Debug.Log(zombie.Count);
+            if (zombie.Count > 0)
+            {
+                allZombieCleared = false;
+                return;
+            }
+            //Debug.Log(zombie.Count);
         }
-        Debug.Log("Check over");
+        allZombieCleared = true;
+        //Debug.Log("Check over");
     }
 
     public void DisableZombies()
