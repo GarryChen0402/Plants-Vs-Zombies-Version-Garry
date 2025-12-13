@@ -51,6 +51,7 @@ public class HandManager : MonoBehaviour
         currentPlant.transform.position = cell.transform.position;
         cell.GetComponent<Cell>().currentPlant = currentPlant;
         currentPlant.GetComponent<Animator>().enabled = true;
+        currentPlant.GetComponent<Plant>().RowIndex = cell.GetComponent<Cell>().row;
         currentCard.GetComponent<CardTemplate>().BePlanted();
         currentCard = null;
         currentPlant = null;

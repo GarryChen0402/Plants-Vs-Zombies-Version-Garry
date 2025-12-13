@@ -65,6 +65,7 @@ public class ZombieManager : MonoBehaviour
         int generateRow = Random.Range(0, zombieSpawnPoints.Count);
         GameObject randomZombie = GameObject.Instantiate(zombies[Random.Range(0, zombies.Count - 1)], zombieSpawnPoints[generateRow].transform.position, Quaternion.identity) ;
         randomZombie.GetComponent<SpriteRenderer>().sortingOrder = generateRow * MaxZombieEachRow + livingZombies[generateRow].Count;
+        randomZombie.GetComponent<Zombie>().RowIndex = generateRow;
         livingZombies[generateRow].Add(randomZombie);
         //CheckLivingZombies();
     }

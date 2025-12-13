@@ -10,6 +10,8 @@ public class Plant : MonoBehaviour
     protected int PlantId{ get;  set; }
     protected float MaxHP { get;  set; }
 
+    public int RowIndex;
+
     public float CurrentHP
     {
         get { return curHP; }

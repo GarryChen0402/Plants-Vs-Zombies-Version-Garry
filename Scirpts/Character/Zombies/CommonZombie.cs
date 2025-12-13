@@ -82,7 +82,7 @@ public class CommonZombie : Zombie
         Debug.Log(collision.tag);
         if (collision.tag.Equals(targetTag))
         {
-
+            if (collision.gameObject.GetComponent<Plant>().RowIndex != RowIndex) return;
             //currentEatPlant = collision.gameObject;
             currentEatPlant = collision.gameObject.GetComponent<Plant>();
             SwitchToEat();

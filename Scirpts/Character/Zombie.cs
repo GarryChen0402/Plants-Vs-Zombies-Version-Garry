@@ -8,6 +8,7 @@ public class Zombie : MonoBehaviour
     [SerializeField] protected float curHP;
     protected float attackDamage;
     protected string targetTag;
+    public int RowIndex;
 
     protected bool canMove;
     public bool CanMove
